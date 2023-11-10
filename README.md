@@ -1,1 +1,1 @@
-# Mini-Project-POS---BE
+# Mini-Project-POS-BE
