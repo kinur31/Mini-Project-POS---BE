@@ -1,9 +1,9 @@
 const path = require("path");
 const multer = require("multer");
 
-const eventStorage = multer.diskStorage({
+const productStorage = multer.diskStorage({
   destination: (req, res, cb) => {
-    cb(null, path.join(__dirname, "../public/images/events"));
+    cb(null, path.join(__dirname, "../public/images/product"));
   },
   filename: (req, file, cb) => {
     // const { username } = req.user;
@@ -51,8 +51,8 @@ const limits = {
   fileSize: 5120 * 5120,
 };
 
-const uploadEventFile = multer({
-  storage: eventStorage,
+const uploadProductFile = multer({
+  storage: productStorage,
   fileFilter,
   limits,
 }).single("image");
@@ -70,7 +70,7 @@ const uploadPaymentFile = multer({
 }).single("image");
 
 module.exports = {
-  uploadEventFile,
+  uploadProductFile,
   uploadAvatarFile,
   uploadPaymentFile
 };
