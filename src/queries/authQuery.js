@@ -2,7 +2,7 @@ const db = require("../models");
 const { Op } = require("sequelize");
 const users = db.users;
 
-const registerQuery = async (fullname, address, email, username, password, role_id, status) => {
+const registerQuery = async (fullname, address, email, username, password, role_id) => {
   try {
     const res = await users.create(
       {
@@ -12,7 +12,7 @@ const registerQuery = async (fullname, address, email, username, password, role_
         username,
         password,
         role_id,
-        status
+        status: true
       },
     );
     

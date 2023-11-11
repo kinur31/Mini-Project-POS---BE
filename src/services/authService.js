@@ -8,7 +8,7 @@ const { registerQuery, keepLoginQuery } = require("../queries/authQuery");
 const { findUserQuery } = require("../queries/userQuery");
 const transporter = require("../utils/nodemailer");
 
-const registerService = async (fullname, address, email, username, password, role_id, status) => {
+const registerService = async (fullname, address, email, username, password, role_id) => {
   try {
     const check = await findUserQuery({ email, username });
 
@@ -33,7 +33,6 @@ const registerService = async (fullname, address, email, username, password, rol
       username,
       hashPassword,
       role_id,
-      status
     );
 
     const temp = await fs.readFileSync(

@@ -31,7 +31,8 @@ module.exports = (sequelize, Sequelize) => {
       },
       status: {
         type: Sequelize.BOOLEAN,
-        allowNull: false,
+        // allowNull: false,
+        // default: true
       },
     },
     {
