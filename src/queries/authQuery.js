@@ -15,6 +15,7 @@ const registerQuery = async (fullname, address, email, username, password, role_
         status
       },
     );
+    
     return res;
   } catch (err) {
     throw err;
