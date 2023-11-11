@@ -4,11 +4,18 @@ const path = require("path");
 const handlebars = require("handlebars");
 const fs = require("fs");
 
-const { registerQuery, keepLoginQuery } = require("../queries/authQuery");
+const { registerQuery } = require("../queries/authQuery");
 const { findUserQuery } = require("../queries/userQuery");
 const transporter = require("../utils/nodemailer");
 
-const registerService = async (fullname, address, email, username, password, role_id) => {
+const registerService = async (
+  fullname,
+  address,
+  email,
+  username,
+  password,
+  role_id
+) => {
   try {
     const check = await findUserQuery({ email, username });
 
@@ -32,7 +39,7 @@ const registerService = async (fullname, address, email, username, password, rol
       email,
       username,
       hashPassword,
-      role_id,
+      role_id
     );
 
     const temp = await fs.readFileSync(
@@ -59,44 +66,6 @@ const registerService = async (fullname, address, email, username, password, rol
   }
 };
 
-const loginService = async (username, password) => {
-  try {
-    const check = await findUserQuery({ username });
-    if (!check) throw new Error("Username doesnt exist");
-
-    const isValid = await bcrypt.compare(password, check.password);
-    if (!isValid) throw new Error("Password is incorrect");
-
-    let payload = {
-      id: check.id,
-      email: check.email,
-      username: check.username,
-      role_id: check.role_id,
-    };
-
-    const token = jwt.sign(payload, process.env.JWT_SECRET_KEY, {
-      expiresIn: "1hr",
-    });
-    return { user: check, token };
-  } catch (err) {
-    throw err;
-  }
-};
-
-const keepLoginService = async (id) => {
-  try {
-    const res = await keepLoginQuery(id);
-
-    if (!res) throw new Error("User doesnt exist");
-
-    return res;
-  } catch (err) {
-    throw err;
-  }
-};
-
 module.exports = {
   registerService,
-  loginService,
-  keepLoginService,
 };
