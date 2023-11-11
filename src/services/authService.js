@@ -2,7 +2,8 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const { registerQuery, keepLoginQuery } = require("../queries/authQuery");
 const { findUserQuery } = require("../queries/userQuery");
-const registerService = async (email, username, password, roleId, avatar) => {
+
+const registerService = async (fullname, address, email, username, password, role_id, status) => {
   try {
     const check = await findUserQuery({ email, username });
 
@@ -13,11 +14,13 @@ const registerService = async (email, username, password, roleId, avatar) => {
     const hashPassword = await bcrypt.hash(password, salt);
 
     const res = await registerQuery(
+      fullname,
+      address,
       email,
       username,
       hashPassword,
-      roleId,
-      avatar
+      role_id,
+      status
     );
 
     return res;
@@ -38,7 +41,7 @@ const loginService = async (username, password) => {
       id: check.id,
       email: check.email,
       username: check.username,
-      roleId: check.roleId,
+      role_id: check.role_id,
     };
 
     const token = jwt.sign(payload, process.env.JWT_SECRET_KEY, {

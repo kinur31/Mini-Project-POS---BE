@@ -2,23 +2,21 @@ const db = require("../models");
 const { Op } = require("sequelize");
 const users = db.users;
 
-const registerQuery = async (email, username, password, roleId, avatar) => {
-  const t = await db.sequelize.transaction();
+const registerQuery = async (fullname, address, email, username, password, role_id, status) => {
   try {
     const res = await users.create(
       {
+        fullname,
+        address,
         email,
         username,
         password,
-        roleId,
-        avatar,
+        role_id,
+        status
       },
-      { transaction: t }
     );
-    await t.commit();
     return res;
   } catch (err) {
-    await t.rollback();
     throw err;
   }
 };
