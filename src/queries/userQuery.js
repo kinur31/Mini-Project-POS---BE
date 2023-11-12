@@ -35,6 +35,7 @@ const createCashierQuery = async (
       username,
       password,
       role_id: 2,
+      status: true,
     });
     console.log(res);
     return res;

@@ -6,9 +6,9 @@ const {
   updateCashierController,
   deleteCashierController,
 } = require("../controller/userController");
-const { checkRoles } = require("../middleware/auth");
+const { checkRoles, verifyToken } = require("../middleware/auth");
 
-router.post("/", checkRoles, createCashierController);
+router.post("/", verifyToken, createCashierController);
 router.patch("/:id", updateCashierController);
 router.delete("/:id", deleteCashierController);
 

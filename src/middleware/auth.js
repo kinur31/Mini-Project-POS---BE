@@ -23,7 +23,7 @@ const verifyToken = (req, res, next) => {
 
 const checkRoles = (req, res, next) => {
   try {
-    if (req.user.roleId === 1) {
+    if (req.user.role_id === 1) {
       next();
     } else {
       return res.status(500).send("Unauthorized");
