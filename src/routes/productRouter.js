@@ -3,15 +3,16 @@ const router = express.Router();
 
 const { uploadProductFile } = require("../middleware/multer");
 
-const { createProductController } = require("../controller/productController");
-const {
-  createProductCategoryController,
-  updateProductCategoryController,
-  deleteProductCategoryController,
-} = require("../controller/productCategoryController");
 
-router.post("/add-product-category", createProductCategoryController);
-router.patch("/:id", updateProductCategoryController);
-router.delete("/:id", deleteProductCategoryController);
+const {
+  createProductController,
+  updateProductController,
+  deactiveProductController,
+  
+} = require("../controller/productController");
+
+router.post("/add-product", uploadProductFile, createProductController);
+router.patch("/:id", uploadProductFile, updateProductController);
+router.patch("/deactive/:id", deactiveProductController);
 
 module.exports = router;
