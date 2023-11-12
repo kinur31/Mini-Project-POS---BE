@@ -4,11 +4,15 @@ const path = require("path");
 const handlebars = require("handlebars");
 const fs = require("fs");
 
-const { registerQuery } = require("../queries/authQuery");
+const {
+  createCashierQuery,
+  updateCashierQuery,
+  deleteCashierQuery,
+} = require("../queries/userQuery");
 const { findUserQuery } = require("../queries/userQuery");
 const transporter = require("../utils/nodemailer");
 
-const registerService = async (
+const createCashierService = async (
   fullname,
   address,
   email,
@@ -33,7 +37,7 @@ const registerService = async (
       expiresIn: "1hr",
     });
 
-    const res = await registerQuery(
+    const res = await createCashierQuery(
       fullname,
       address,
       email,
@@ -42,30 +46,40 @@ const registerService = async (
       role_id
     );
 
-    const temp = await fs.readFileSync(
-      path.join(__dirname, "../template", "registration-template.html"),
-      "utf-8"
-    );
-
-    // const activationLink = `${process.env.FE_BASE_URL}/verify?token=${token}`;
-    const activationLink = `localhost:8080/verify?token=${token}`;
-
-    const tempCompile = await handlebars.compile(temp);
-    const tempResult = tempCompile({ email: res.email, link: activationLink });
-
-    await transporter.sendMail({
-      from: process.env.GMAIL_USER,
-      to: res.email,
-      subject: "Activation",
-      html: tempResult,
-    });
-
     return res;
   } catch (err) {
     throw err;
   }
 };
 
+const updateCashierService = async (id, category_name) => {
+  try {
+    const check = await findProductCategoryQuery({ id });
+    if (!check) throw new Error("Categories not found");
+
+    const result = await updateCashierQuery(id, category_name);
+
+    return result;
+  } catch (err) {
+    throw err;
+  }
+};
+
+const deleteCashierService = async (id) => {
+  try {
+    const check = await findProductCategoryQuery({ id });
+    if (!check) throw new Error("Categories not found");
+
+    const result = await deleteCashierQuery(id);
+
+    return result;
+  } catch (err) {
+    throw err;
+  }
+};
+
 module.exports = {
-  registerService,
+  createCashierService,
+  updateCashierService,
+  deleteCashierService,
 };
