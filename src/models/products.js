@@ -30,9 +30,9 @@ module.exports = (sequelize, Sequelize) => {
         }
     );
 
-    // role.associate = (models) => {
-    //     role.hasMany(models.user, { foreignKey: "roleId"});
-    // };
+    products.associate = (models) => {
+        products.belongsToMany(models.productDetail, { through: "product_detail"});
+    };
 
     return products;
 }

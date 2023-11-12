@@ -1,6 +1,6 @@
 module.exports = (sequelize, Sequelize) => {
     const productCategory = sequelize.define(
-        "product_category",
+        "productCategory",
         {
             category_name: {
                 type: Sequelize.STRING,
@@ -12,9 +12,9 @@ module.exports = (sequelize, Sequelize) => {
         }
     );
 
-    // role.associate = (models) => {
-    //     role.hasMany(models.user, { foreignKey: "roleId"});
-    // };
+    productCategory.associate = (models) => {
+        productCategory.belongsToMany(models.productDetail, { through: "product_detail"});
+    };
 
     return productCategory;
 }
