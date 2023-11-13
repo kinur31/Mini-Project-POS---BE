@@ -22,11 +22,12 @@ app.use(
     ],
   })
 );
-const userRouter = require("./routes/userRouter");
-const authRouter = require("./routes/authRouter");
 
-app.use("/user", userRouter);
+const authRouter = require("./routes/authRouter");
+const userRouter = require("./routes/userRouter");
+
 app.use("/auth", authRouter);
+app.use("/user", userRouter);
 
 app.listen(PORT, (req, res) => {
   console.log(`server started on port ${PORT}`);
