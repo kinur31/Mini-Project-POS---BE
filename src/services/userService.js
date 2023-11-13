@@ -8,6 +8,7 @@ const {
   createCashierQuery,
   updateCashierQuery,
   deleteCashierQuery,
+  deactiveCashierQuery,
 } = require("../queries/userQuery");
 const { findUserQuery } = require("../queries/userQuery");
 const transporter = require("../utils/nodemailer");
@@ -52,12 +53,12 @@ const createCashierService = async (
   }
 };
 
-const updateCashierService = async (id, category_name) => {
+const updateCashierService = async (id, fullname, address, username) => {
   try {
-    const check = await findProductCategoryQuery({ id });
-    if (!check) throw new Error("Categories not found");
+    const check = await findUserQuery({ id });
+    if (!check) throw new Error("Username not found");
 
-    const result = await updateCashierQuery(id, category_name);
+    const result = await updateCashierQuery(id, fullname, address, username);
 
     return result;
   } catch (err) {
@@ -67,10 +68,21 @@ const updateCashierService = async (id, category_name) => {
 
 const deleteCashierService = async (id) => {
   try {
-    const check = await findProductCategoryQuery({ id });
-    if (!check) throw new Error("Categories not found");
+    const check = await findUserQuery({ id });
+    if (!check) throw new Error("User not found");
 
-    const result = await deleteCashierQuery(id);
+    await deleteCashierQuery(id);
+  } catch (err) {
+    throw err;
+  }
+};
+
+const deactiveCashierService = async (id) => {
+  try {
+    const check = await findUserQuery({ id });
+    if (!check) throw new Error("Cashier not found");
+
+    const result = await deactiveCashierQuery(id);
 
     return result;
   } catch (err) {
@@ -82,4 +94,5 @@ module.exports = {
   createCashierService,
   updateCashierService,
   deleteCashierService,
+  deactiveCashierService,
 };

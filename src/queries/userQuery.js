@@ -2,12 +2,13 @@ const db = require("../models");
 const { Op } = require("sequelize");
 const users = db.users;
 
-const findUserQuery = async ({ email = null, username = null }) => {
+const findUserQuery = async ({ id = null, email = null, username = null }) => {
   console.log(email, username);
   try {
     const res = await users.findOne({
       where: {
         [Op.or]: {
+          id,
           email,
           username,
         },
@@ -44,11 +45,14 @@ const createCashierQuery = async (
   }
 };
 
-const updateCashierQuery = async (id, category_name) => {
+const updateCashierQuery = async (id, fullname, address, username) => {
   try {
     const res = await users.update(
       {
-        category_name,
+        fullname,
+        address,
+        username,
+        status: true,
       },
       {
         where: {
@@ -65,11 +69,29 @@ const updateCashierQuery = async (id, category_name) => {
 
 const deleteCashierQuery = async (id) => {
   try {
-    const res = await users.destroy({
+    await users.destroy({
       where: {
         id: id,
       },
     });
+    console.log(res);
+  } catch (err) {
+    throw err;
+  }
+};
+
+const deactiveCashierQuery = async (id) => {
+  try {
+    const res = await users.update(
+      {
+        status: false,
+      },
+      {
+        where: {
+          id: id,
+        },
+      }
+    );
     console.log(res);
     return res;
   } catch (err) {
@@ -82,4 +104,5 @@ module.exports = {
   createCashierQuery,
   updateCashierQuery,
   deleteCashierQuery,
+  deactiveCashierQuery,
 };

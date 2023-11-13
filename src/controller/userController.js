@@ -2,6 +2,7 @@ const {
   createCashierService,
   updateCashierService,
   deleteCashierService,
+  deactiveCashierService,
 } = require("../services/userService");
 
 const createCashierController = async (req, res) => {
@@ -33,14 +34,14 @@ const updateCashierController = async (req, res) => {
   console.log();
   try {
     const { id } = req.params;
-    const { category_name } = req.body;
-    const result = await updateCashierService(id, category_name);
+    const { fullname, address, username } = req.body;
+    const result = await updateCashierService(id, fullname, address, username);
 
     return res.status(200).json({
-      message: "Update category successfully",
+      message: "Update successfully",
     });
   } catch (err) {
-    return res.status(500).send("Update product category failed");
+    return res.status(500).send(err?.message);
   }
 };
 
@@ -48,13 +49,27 @@ const deleteCashierController = async (req, res) => {
   console.log();
   try {
     const { id } = req.params;
-    const result = await deleteCashierService(id);
+    await deleteCashierService(id);
 
     return res.status(200).json({
-      message: "Delete product category successfully",
+      message: "Delete cashier successfully",
     });
   } catch (err) {
-    return res.status(500).send("Delete product category failed");
+    return res.status(500).send(err?.message);
+  }
+};
+
+const deactiveCashierController = async (req, res) => {
+  console.log();
+  try {
+    const { id } = req.params;
+    await deactiveCashierService(id);
+
+    return res.status(200).json({
+      message: "Deactive cashier successfully",
+    });
+  } catch (err) {
+    return res.status(500).send(err?.message);
   }
 };
 
@@ -62,4 +77,5 @@ module.exports = {
   createCashierController,
   updateCashierController,
   deleteCashierController,
+  deactiveCashierController,
 };
