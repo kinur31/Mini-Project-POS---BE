@@ -20,9 +20,6 @@ module.exports = {
       price: {
         type: Sequelize.DECIMAL,
       },
-      description: {
-        type: Sequelize.STRING,
-      },
       stock: {
         type: Sequelize.INTEGER,
       },
@@ -31,14 +28,11 @@ module.exports = {
       },
       status_product: {
         type: Sequelize.BOOLEAN,
-    }
+      },
     });
   },
 
   async down(queryInterface, Sequelize) {
-    
-    
-     await queryInterface.dropTable('products');
-     
+    await queryInterface.dropTable("products");
   },
 };
