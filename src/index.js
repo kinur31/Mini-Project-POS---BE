@@ -28,6 +28,9 @@ app.use(
 const productRouter = require('./routes/productRouter');
 app.use("/product", productRouter);
 
+const filterRouter = require("./routes/filterRouter");
+app.use("/filter", filterRouter)
+
 app.listen(PORT, (req, res) => {
     console.log(`server started on port ${PORT}`);
 });

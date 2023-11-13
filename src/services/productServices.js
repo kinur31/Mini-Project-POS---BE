@@ -1,62 +1,16 @@
-const { findProductQuery, createProductQuery, updateProductQuery, deactiveProductQuery, } = require ("../queries/productQuery");
+const { getProductQuery } = require("../queries/productQuery")
 
-const createProductService = async (
-    product_name,
-    product_category_id,
-    price,
-    description,
-    stock,
-    image,
-    status_product,
-) => {
+const getProductService = async () => {
     try {
-        const res = await createProductQuery (
-            product_name,
-            product_category_id,
-            price,
-            description,
-            stock,
-            image,
-            status_product,
-        );
+        const res = await getProductQuery();
         return res;
     } catch (err) {
         throw err;
     }
-};
+}
 
-const updateProductService = async (id, product_name,
-    product_category_id,
-    price,
-    description,
-    stock,
-    image) => {
-    try {
-        const check = await findProductQuery({id});
-        if (!check) throw new Error("Product not found");
 
-       await updateProductQuery (id, product_name,
-        product_category_id,
-        price,
-        description,
-        stock,
-        image);
-   
-   }  catch (err) {
-    throw err
-}};
 
-const deactiveProductService = async (id) => {
-    try {
-        const check = await findProductQuery({id});
-        if (!check) throw new Error("Product not found");
-       await deactiveProductQuery (id);
-   
-   }  catch (err) {
-    throw err
-}};
 module.exports = {
-    createProductService,
-    updateProductService,
-    deactiveProductService,
+    getProductService
 }

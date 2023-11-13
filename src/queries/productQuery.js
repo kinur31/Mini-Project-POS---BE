@@ -3,7 +3,6 @@ const { Op, Sequelize } = require("sequelize");
 const db = require("../models");
 const products = db.products;
 
-
 const findProductQuery = async ({id=null}) => {
   try {
       const params = {};
@@ -19,83 +18,18 @@ const findProductQuery = async ({id=null}) => {
   }
 };
 
-const createProductQuery = async (
-    product_name,
-    product_category_id,
-    price,
-    description,
-    stock,
-    image,
-    status_product,
-) => {
-    try {
-    const res = await products.create({
-        product_name,
-        product_category_id,
-        price,
-        description,
-        stock,
-        image,
-        status_product: true,
-    });
-    console.log(res);
+const getProductQuery = async () => {
+  try {
+    const res = await products.findAll({
+      include:[db.productCategory]
+    })
     return res;
   } catch (err) {
     throw err;
   }
-};
-
-const updateProductQuery = async (id, product_name,
-  product_category_id,
-  price,
-  description,
-  stock,
-  image) => {
-    console.log(id, product_name, product_category_id, price, description)
-  try {
-      const res = await products.update(
-          {
-            product_name,
-            product_category_id,
-            price,
-            description,
-            stock,
-            image
-          },
-          {
-              where:{
-                  id: id,
-              } 
-      })
-  console.log(res);
-  return res;
-} catch (err) {
-  throw err;
 }
-};
-
-const deactiveProductQuery = async (id) => {
-  try {
-      const res = await products.update(
-          {
-           status_product: false,
-          },
-          {
-              where:{
-                  id: id,
-              } 
-      })
-  console.log(res);
-  return res;
-} catch (err) {
-  throw err;
-}
-};
-
 
 module.exports = {
-    createProductQuery,
     findProductQuery,
-    updateProductQuery,
-    deactiveProductQuery,
+    getProductQuery,
 };

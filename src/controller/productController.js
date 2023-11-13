@@ -1,78 +1,17 @@
-const {
-  createProductService,
-  updateProductService,
-  deactiveProductService,
-} = require("../services/productServices");
+const { getProductService } = require("../services/productServices");
 
-const createProductController = async (req, res) => {
+const getProductController = async (req, res) => {
   try {
-    const {
-      product_name,
-      product_category_id,
-      price,
-      description,
-      stock,
-      status_product,
-    } = req.body;
-    const result = await createProductService(
-      product_name,
-      product_category_id,
-      price,
-      description,
-      stock,
-      status_product,
-      req.file?.filename
-    );
+    const result = await getProductService();
     return res.status(200).json({
-      message: "Product created successfully",
-      data: result,
-    });
+      message: "Success",
+      data: result
+    })
   } catch (err) {
-    console.log(err);
-    return res.status(500).send(err.message);
+    throw err;
   }
-};
+}
 
-const updateProductController = async (req, res) => {
-  console.log();
-  try {
-    const { id } = req.params;
-    const { product_name, product_category_id, price, description, stock } =
-      req.body;
-     await updateProductService(
-      id,
-      product_name,
-      product_category_id,
-      price,
-      description,
-      stock,
-      req.file?.filename
-    );
-
-    return res.status(200).json({
-      message: "Update product successfully",
-    });
-  } catch (err) {
-    return res.status(500).send(err?.message);
-  }
-};
-
-
-const deactiveProductController = async (req, res) => {
-  try {
-    const { id } = req.params;
-     await deactiveProductService(
-      id);
-
-    return res.status(200).json({
-      message: "Deactive product successfully",
-    });
-  } catch (err) {
-    return res.status(500).send(err?.message);
-  }
-};
 module.exports = {
-  createProductController,
-  updateProductController,
-  deactiveProductController,
+  getProductController
 };
