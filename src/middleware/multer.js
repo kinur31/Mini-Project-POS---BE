@@ -1,17 +1,6 @@
 const path = require("path");
 const multer = require("multer");
 
-const eventStorage = multer.diskStorage({
-  destination: (req, res, cb) => {
-    cb(null, path.join(__dirname, "../public/images/events"));
-  },
-  filename: (req, file, cb) => {
-    // const { username } = req.user;
-    // cb(null, `event_${username}-${Date.now()}-${file.originalname}`);
-    cb(null, `event_user-${Date.now()}-${file.originalname}`);
-  },
-});
-
 const avatarStorage = multer.diskStorage({
   destination: (req, res, cb) => {
     cb(null, path.join(__dirname, "../public/images/avatar"));
@@ -19,17 +8,6 @@ const avatarStorage = multer.diskStorage({
   filename: (req, file, cb) => {
     const { username } = req.body;
     cb(null, `avatar_${username}-${Date.now()}-${file.originalname}`);
-  },
-});
-
-const paymentStorage = multer.diskStorage({
-  destination: (req, res, cb) => {
-    cb(null, path.join(__dirname, "../public/images/payment"));
-  },
-  filename: (req, file, cb) => {
-    // const { username } = req.user;
-    // cb(null, `event_${username}-${Date.now()}-${file.originalname}`);
-    cb(null, `payment_user-${Date.now()}-${file.originalname}`);
   },
 });
 
@@ -48,14 +26,8 @@ const fileFilter = (req, file, cb) => {
 };
 
 const limits = {
-  fileSize: 5120 * 5120,
+  fileSize: 1024 * 1024,
 };
-
-const uploadEventFile = multer({
-  storage: eventStorage,
-  fileFilter,
-  limits,
-}).single("image");
 
 const uploadAvatarFile = multer({
   storage: avatarStorage,
@@ -63,14 +35,6 @@ const uploadAvatarFile = multer({
   limits,
 }).single("avatar");
 
-const uploadPaymentFile = multer({
-  storage: paymentStorage,
-  fileFilter,
-  limits,
-}).single("image");
-
 module.exports = {
-  uploadEventFile,
   uploadAvatarFile,
-  uploadPaymentFile
 };
