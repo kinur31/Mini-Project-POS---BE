@@ -7,7 +7,9 @@ const {
   deleteProductCategoryController,
   getProductCategoryController,
 } = require("../controller/productCategoryController");
+const { createProductController } = require("../controller/productController");
 
+router.post("/add-product", createProductController)
 
 router.get("/list-category", getProductCategoryController);
 router.post("/add-product-category", createProductCategoryController);

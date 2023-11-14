@@ -1,7 +1,7 @@
 const db = require("../models");
 const sequelize = require("../models");
 const { Op, Sequelize } = require("sequelize");
-const productCategory = db.product_category;
+const productCategory = db.productCategory;
 
 const findProductCategoryQuery = async ({id=null}) => {
     try {
