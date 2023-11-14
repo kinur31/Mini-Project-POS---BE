@@ -1,21 +1,37 @@
 const express = require("express");
 const router = express.Router();
 
+//Product Category
 const {
   createProductCategoryController,
   updateProductCategoryController,
   deleteProductCategoryController,
   getProductCategoryController,
 } = require("../controller/productCategoryController");
-const { createProductController } = require("../controller/productController");
+
+//product
+const {
+  createProductController,
+  deleteProductController,
+  updateProductController,
+  getProductController,
+} = require("../controller/productController");
 const { uploadProductFile } = require("../middleware/multer");
 
-
-router.post("/add-product", uploadProductFile, createProductController)
- 
+//Product Category
 router.get("/list-category", getProductCategoryController);
-router.post("/add-product-category", uploadProductFile, createProductCategoryController);
+router.post(
+  "/add-product-category",
+  uploadProductFile,
+  createProductCategoryController
+);
 router.patch("/:id", updateProductCategoryController);
 router.delete("/:id", deleteProductCategoryController);
+
+//Product
+router.post("/add-product", uploadProductFile, createProductController);
+router.delete("/:id", deleteProductController);
+router.patch("/:id", updateProductController);
+router.get("/list-product", getProductController);
 
 module.exports = router;

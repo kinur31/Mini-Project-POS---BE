@@ -2,6 +2,8 @@ const {
   createProductService,
   updateProductService,
   deactiveProductService,
+  deleteProductService,
+  getProductService,
 } = require("../services/productServices");
 
 const createProductController = async (req, res) => {
@@ -55,6 +57,19 @@ const updateProductController = async (req, res) => {
   }
 };
 
+const getProductController = async (req, res) => {
+  try {
+    const result = await getProductService();
+    return res.status(200).json({
+      message: "success",
+      data: result,
+    });
+  } catch (err) {
+    throw err;
+  }
+};
+
+
 
 const deactiveProductController = async (req, res) => {
   try {
@@ -69,8 +84,27 @@ const deactiveProductController = async (req, res) => {
     return res.status(500).send(err?.message);
   }
 };
+
+const deleteProductController = async (req, res) => {
+  console.log()
+  try {
+     const { id } = req.params;
+     const result = await deleteProductService (id);
+     
+     return res.status(200).json({
+         message: "Delete product successfully",
+  })
+ } catch (err) {
+     return res.status(500).send("Delete product failed");
+ }
+ }
+
+
+
 module.exports = {
   createProductController,
   updateProductController,
   deactiveProductController,
+  deleteProductController,
+  getProductController,
 };

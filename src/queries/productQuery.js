@@ -19,6 +19,17 @@ const findProductQuery = async ({id=null}) => {
   }
 };
 
+
+const getProductQuery = async () => {
+  try {
+    const res = await products.findAll();
+    return res;
+  } catch (err) {
+    throw err;
+  }
+};
+
+
 const createProductQuery = async (
     product_name,
     product_category_id,
@@ -43,6 +54,7 @@ const createProductQuery = async (
   }
 };
 
+
 const updateProductQuery = async (id, product_name,
   product_category_id,
   price,
@@ -63,12 +75,13 @@ const updateProductQuery = async (id, product_name,
                   id: id,
               } 
       })
-  console.log(res);
+
   return res;
 } catch (err) {
   throw err;
 }
 };
+
 
 const deactiveProductQuery = async (id) => {
   try {
@@ -89,9 +102,27 @@ const deactiveProductQuery = async (id) => {
 };
 
 
+const deleteProductQuery = async (id) => {
+  try {
+      const res = await products.destroy(
+          {
+              where:{
+                  id: id,
+              } 
+      });
+  console.log(res);
+  return res;
+} catch (err) {
+  throw err;
+}
+};
+
+
 module.exports = {
     createProductQuery,
     findProductQuery,
     updateProductQuery,
     deactiveProductQuery,
+    deleteProductQuery,
+    getProductQuery,
 };

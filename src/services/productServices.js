@@ -1,4 +1,4 @@
-const { findProductQuery, createProductQuery, updateProductQuery, deactiveProductQuery, } = require ("../queries/productQuery");
+const { getProductQuery, findProductQuery, createProductQuery, updateProductQuery, deactiveProductQuery, deleteProductQuery, } = require ("../queries/productQuery");
 
 const createProductService = async (
     product_name,
@@ -23,7 +23,17 @@ const createProductService = async (
     }
 };
 
-const updateProductService = async (id, product_name,
+const getProductService = async () => {
+    try {
+      const res = await getProductQuery();
+      return res;
+    } catch (err) {
+      throw err;
+    }
+  };
+
+
+  const updateProductService = async (id, product_name,
     product_category_id,
     price,
     stock,
@@ -51,8 +61,25 @@ const deactiveProductService = async (id) => {
    }  catch (err) {
     throw err
 }};
+
+const deleteProductService = async (id) => {
+    try {
+        const check = await findProductQuery({id});
+        if (!check) throw new Error("Categories not found");
+
+       const result = await deleteProductQuery (id);
+       
+      return result
+  } catch (err) {
+    throw err;
+  }
+};
+
+
 module.exports = {
     createProductService,
     updateProductService,
     deactiveProductService,
-}
+    deleteProductService,
+    getProductService,
+};
