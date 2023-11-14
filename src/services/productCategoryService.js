@@ -1,4 +1,4 @@
-const { createProductCategoryQuery, updateProductCategoryQuery, findProductCategoryQuery, deleteProductCategoryQuery, } = require("../queries/productCategoryQuery");
+const { createProductCategoryQuery, getProductCategoryQuery, updateProductCategoryQuery, findProductCategoryQuery, deleteProductCategoryQuery, } = require("../queries/productCategoryQuery");
 
 const createProductCategoryService = async (
     category_name,
@@ -12,6 +12,16 @@ const createProductCategoryService = async (
         throw err;
     }
 };
+
+const getProductCategoryService = async () => {
+    try {
+      const res = await getProductCategoryQuery();
+      return res;
+    } catch (err) {
+      throw err;
+    }
+  };
+  
 
 const updateProductCategoryService = async (id, category_name ) => {
     try {
@@ -42,6 +52,7 @@ const deleteProductCategoryService = async (id) => {
 
 module.exports = { 
     createProductCategoryService,
+    getProductCategoryService,
     updateProductCategoryService,
     deleteProductCategoryService,
     

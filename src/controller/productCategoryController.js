@@ -1,4 +1,4 @@
-const { createProductCategoryService, updateProductCategoryService, deleteProductCategoryService, } = require ("../services/productCategoryService");
+const { createProductCategoryService, getProductCategoryService, updateProductCategoryService, deleteProductCategoryService, } = require ("../services/productCategoryService");
 
 const createProductCategoryController = async (req, res) => {
     try {
@@ -17,6 +17,19 @@ const createProductCategoryController = async (req, res) => {
       return res.status(500).send(err.message);
     }
   };
+
+  const getProductCategoryController = async (req, res) => {
+    try {
+      const result = await getProductCategoryService();
+      return res.status(200).json({
+        message: "success",
+        data: result,
+      });
+    } catch (err) {
+      throw err;
+    }
+  };
+  
 
   const updateProductCategoryController = async (req, res) => {
     console.log()
@@ -49,6 +62,7 @@ const createProductCategoryController = async (req, res) => {
   
   module.exports = {
     createProductCategoryController,
+    getProductCategoryController,
     updateProductCategoryController,
     deleteProductCategoryController,
   };

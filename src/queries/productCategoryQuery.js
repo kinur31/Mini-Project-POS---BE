@@ -18,6 +18,15 @@ const findProductCategoryQuery = async ({id=null}) => {
     }
 };
 
+const getProductCategoryQuery = async () => {
+    try {
+      const res = await productCategory.findAll();
+      return res;
+    } catch (err) {
+      throw err;
+    }
+  };
+
 const createProductCategoryQuery = async (
     category_name,
 ) => {
@@ -67,6 +76,7 @@ const deleteProductCategoryQuery = async (id) => {
 
 
 module.exports = {
+    getProductCategoryQuery,
     createProductCategoryQuery,
     updateProductCategoryQuery,
     findProductCategoryQuery,
