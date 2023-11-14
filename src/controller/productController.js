@@ -13,6 +13,7 @@ const createProductController = async (req, res) => {
       stock,
       status_product,
     } = req.body;
+    console.log(product_name)
     const result = await createProductService(
       product_name,
       product_category_id,

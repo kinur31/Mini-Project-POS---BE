@@ -24,8 +24,8 @@ const createProductQuery = async (
     product_category_id,
     price,
     stock,
-    image,
     status_product,
+    image,
 ) => {
     try {
     const res = await products.create({
@@ -33,8 +33,8 @@ const createProductQuery = async (
         product_category_id,
         price,
         stock,
-        image,
         status_product: true,
+        image,
     });
     console.log(res);
     return res;

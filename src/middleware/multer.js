@@ -3,7 +3,7 @@ const multer = require("multer");
 
 const productStorage = multer.diskStorage({
   destination: (req, res, cb) => {
-    cb(null, path.join(__dirname, "../public/images/product"));
+    cb(null, path.join(__dirname, "../public/images/products"));
   },
   filename: (req, file, cb) => {
     // const { username } = req.user;

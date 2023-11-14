@@ -8,11 +8,13 @@ const {
   getProductCategoryController,
 } = require("../controller/productCategoryController");
 const { createProductController } = require("../controller/productController");
+const { uploadProductFile } = require("../middleware/multer");
 
-router.post("/add-product", createProductController)
 
+router.post("/add-product", uploadProductFile, createProductController)
+ 
 router.get("/list-category", getProductCategoryController);
-router.post("/add-product-category", createProductCategoryController);
+router.post("/add-product-category", uploadProductFile, createProductCategoryController);
 router.patch("/:id", updateProductCategoryController);
 router.delete("/:id", deleteProductCategoryController);
 

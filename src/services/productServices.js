@@ -5,8 +5,8 @@ const createProductService = async (
     product_category_id,
     price,
     stock,
-    image,
     status_product,
+    image,
 ) => {
     try {
         const res = await createProductQuery (
@@ -14,8 +14,8 @@ const createProductService = async (
             product_category_id,
             price,
             stock,
-            image,
             status_product,
+            image,
         );
         return res;
     } catch (err) {
