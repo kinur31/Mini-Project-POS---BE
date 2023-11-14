@@ -10,7 +10,6 @@ const createProductController = async (req, res) => {
       product_name,
       product_category_id,
       price,
-      description,
       stock,
       status_product,
     } = req.body;
@@ -18,7 +17,6 @@ const createProductController = async (req, res) => {
       product_name,
       product_category_id,
       price,
-      description,
       stock,
       status_product,
       req.file?.filename
@@ -37,14 +35,13 @@ const updateProductController = async (req, res) => {
   console.log();
   try {
     const { id } = req.params;
-    const { product_name, product_category_id, price, description, stock } =
+    const { product_name, product_category_id, price, stock } =
       req.body;
      await updateProductService(
       id,
       product_name,
       product_category_id,
       price,
-      description,
       stock,
       req.file?.filename
     );

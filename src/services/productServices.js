@@ -4,7 +4,6 @@ const createProductService = async (
     product_name,
     product_category_id,
     price,
-    description,
     stock,
     image,
     status_product,
@@ -14,7 +13,6 @@ const createProductService = async (
             product_name,
             product_category_id,
             price,
-            description,
             stock,
             image,
             status_product,
@@ -28,7 +26,6 @@ const createProductService = async (
 const updateProductService = async (id, product_name,
     product_category_id,
     price,
-    description,
     stock,
     image) => {
     try {
@@ -38,7 +35,6 @@ const updateProductService = async (id, product_name,
        await updateProductQuery (id, product_name,
         product_category_id,
         price,
-        description,
         stock,
         image);
    

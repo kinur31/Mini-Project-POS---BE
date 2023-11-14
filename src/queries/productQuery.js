@@ -23,7 +23,6 @@ const createProductQuery = async (
     product_name,
     product_category_id,
     price,
-    description,
     stock,
     image,
     status_product,
@@ -33,7 +32,6 @@ const createProductQuery = async (
         product_name,
         product_category_id,
         price,
-        description,
         stock,
         image,
         status_product: true,
@@ -48,17 +46,15 @@ const createProductQuery = async (
 const updateProductQuery = async (id, product_name,
   product_category_id,
   price,
-  description,
   stock,
   image) => {
-    console.log(id, product_name, product_category_id, price, description)
+    console.log(id, product_name, product_category_id, price)
   try {
       const res = await products.update(
           {
             product_name,
             product_category_id,
             price,
-            description,
             stock,
             image
           },

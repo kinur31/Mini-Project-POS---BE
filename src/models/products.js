@@ -11,9 +11,6 @@ module.exports = (sequelize, Sequelize) => {
             price: {
                 type: Sequelize.DECIMAL,
             },
-            description: {
-                type: Sequelize.STRING,
-            },
             stock: {
                 type: Sequelize.INTEGER,
             },
@@ -31,8 +28,10 @@ module.exports = (sequelize, Sequelize) => {
     );
 
     products.associate = (models) => {
-        products.belongsTo(models.productCategory, { foreignkey: "product_category_id"});
-    };
+        products.belongsTo(models.productCategory, {
+          foreignKey: "product_category_id",
+        });
+      };
 
     return products;
 }
