@@ -29,6 +29,7 @@ const getProductQuery = async () => {
   }
 }
 
+
 module.exports = {
     findProductQuery,
     getProductQuery,

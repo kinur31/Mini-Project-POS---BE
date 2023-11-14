@@ -1,10 +1,10 @@
-const { filterProductService } = require("../services/filterService");
+const { filterProductService, paginationProductService } = require("../services/filterService");
 
-const findProductController = async (req, res) => {
+const filterProductController = async (req, res) => {
     try {
-        const {productName} = req.query;
-        const result = await filterProductService(productName)
-        
+        const { productName, productCategory } = req.query;
+        const result = await filterProductService( productName, productCategory );
+
         return res.status(200).json({
             message: "Success",
             data: result
@@ -14,21 +14,21 @@ const findProductController = async (req, res) => {
     }
 }
 
-const filterCategoryController = async (req, res) => {
+const paginationProductController = async (req, res) => {
     try {
-        const { productCategory } = req.query;
-        const result = await filterProductService( productCategory );
+        const {page, pageSize} = req.query;
 
+        const result = await paginationProductService(page, pageSize);
         return res.status(200).json({
-            message: "Success",
-            data: result
+          message: "Success",
+          data: result
         })
-    } catch (err) {
-        return res.status(500).send(err?.message);
-    }
+      } catch (err) {
+        throw err;
+      }
 }
 
 module.exports = {
-    findProductController,
-    filterCategoryController,
+    filterProductController,
+    paginationProductController
 }

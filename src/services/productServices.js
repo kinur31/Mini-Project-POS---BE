@@ -9,8 +9,6 @@ const getProductService = async () => {
     }
 }
 
-
-
 module.exports = {
     getProductService
 }

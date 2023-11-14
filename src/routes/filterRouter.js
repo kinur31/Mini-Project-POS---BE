@@ -1,8 +1,10 @@
 const express = require("express");
 const router = express.Router();
 
-const { findProductController } = require("../controller/filterController");
+const { filterProductController, paginationProductController } = require("../controller/filterController");
 
-router.get("/search", findProductController);
+router.get("/", filterProductController);
+router.get("/search", filterProductController);
+router.get("/pagination", paginationProductController)
 
 module.exports = router;
