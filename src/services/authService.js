@@ -4,49 +4,9 @@ const path = require("path");
 const handlebars = require("handlebars");
 const fs = require("fs");
 
-const { registerQuery, keepLoginQuery } = require("../queries/authQuery");
+const { keepLoginQuery } = require("../queries/authQuery");
 const { findUserQuery } = require("../queries/userQuery");
 const transporter = require("../utils/nodemailer");
-
-const registerService = async (
-  fullname,
-  address,
-  email,
-  username,
-  password,
-  role_id
-) => {
-  try {
-    const check = await findUserQuery({ email, username });
-
-    if (check) throw new Error("Email or username already exist");
-
-    const salt = await bcrypt.genSalt(10);
-
-    const hashPassword = await bcrypt.hash(password, salt);
-
-    let payload = {
-      email: email,
-    };
-
-    const token = jwt.sign(payload, process.env.JWT_SECRET_KEY, {
-      expiresIn: "1hr",
-    });
-
-    const res = await registerQuery(
-      fullname,
-      address,
-      email,
-      username,
-      hashPassword,
-      role_id
-    );
-
-    return res;
-  } catch (err) {
-    throw err;
-  }
-};
 
 const loginService = async (username, password) => {
   try {
@@ -85,7 +45,6 @@ const keepLoginService = async (id) => {
 };
 
 module.exports = {
-  registerService,
   loginService,
   keepLoginService,
 };

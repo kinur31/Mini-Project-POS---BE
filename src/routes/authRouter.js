@@ -3,13 +3,11 @@ const router = express.Router();
 
 const { verifyToken } = require("../middleware/auth");
 const {
-  registerController,
   loginController,
   keepLoginController,
 } = require("../controller/authController");
 
 router.post("/login", loginController);
-router.post("/register", registerController);
 router.get("/keep-login", verifyToken, keepLoginController);
 
 module.exports = router;
