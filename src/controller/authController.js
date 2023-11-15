@@ -1,4 +1,33 @@
-const { loginService, keepLoginService } = require("../services/authService");
+const {
+  registerService,
+  loginService,
+  keepLoginService,
+} = require("../services/authService");
+
+const registerController = async (req, res) => {
+  try {
+    const { fullname, address, email, username, password, role_id } = req.body;
+
+    const result = await registerService(
+      fullname,
+      address,
+      email,
+      username,
+      password,
+      role_id
+    );
+
+    return res.status(200).json({
+      message: "Success",
+      data: result,
+    });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({
+      message: err.message,
+    });
+  }
+};
 
 const loginController = async (req, res) => {
   try {
@@ -31,6 +60,7 @@ const keepLoginController = async (req, res) => {
 };
 
 module.exports = {
+  registerController,
   loginController,
   keepLoginController,
 };
