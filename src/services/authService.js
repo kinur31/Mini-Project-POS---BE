@@ -54,7 +54,6 @@ const forgotPasswordService = async (email) => {
 const resetPasswordService = async (token) => {
   try {
     return "berhasil";
-    s;
   } catch (err) {
     return "gagal";
   }
