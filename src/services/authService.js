@@ -8,7 +8,14 @@ const { registerQuery, keepLoginQuery } = require("../queries/authQuery");
 const { findUserQuery } = require("../queries/userQuery");
 const transporter = require("../utils/nodemailer");
 
-const registerService = async (fullname, address, email, username, password, role_id) => {
+const registerService = async (
+  fullname,
+  address,
+  email,
+  username,
+  password,
+  role_id
+) => {
   try {
     const check = await findUserQuery({ email, username });
 
@@ -32,26 +39,8 @@ const registerService = async (fullname, address, email, username, password, rol
       email,
       username,
       hashPassword,
-      role_id,
+      role_id
     );
-
-    const temp = await fs.readFileSync(
-      path.join(__dirname, "../template", "registration-template.html"),
-      "utf-8"
-    );
-
-    // const activationLink = `${process.env.FE_BASE_URL}/verify?token=${token}`;
-    const activationLink = `localhost:8080/verify?token=${token}`;
-
-    const tempCompile = await handlebars.compile(temp);
-    const tempResult = tempCompile({ email: res.email, link: activationLink });
-
-    await transporter.sendMail({
-      from: process.env.GMAIL_USER,
-      to: res.email,
-      subject: "Activation",
-      html: tempResult,
-    });
 
     return res;
   } catch (err) {
