@@ -31,7 +31,6 @@ const createCashierController = async (req, res) => {
 };
 
 const updateCashierController = async (req, res) => {
-  console.log();
   try {
     const { id } = req.params;
     const { fullname, address, username } = req.body;
@@ -46,7 +45,6 @@ const updateCashierController = async (req, res) => {
 };
 
 const deleteCashierController = async (req, res) => {
-  console.log();
   try {
     const { id } = req.params;
     await deleteCashierService(id);
@@ -60,7 +58,6 @@ const deleteCashierController = async (req, res) => {
 };
 
 const deactiveCashierController = async (req, res) => {
-  console.log();
   try {
     const { id } = req.params;
     await deactiveCashierService(id);
