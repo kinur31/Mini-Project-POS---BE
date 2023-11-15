@@ -1,4 +1,43 @@
-const { loginService, keepLoginService } = require("../services/authService");
+const {
+  forgotPasswordService,
+  loginService,
+  keepLoginService,
+  resetPasswordService,
+} = require("../services/authService");
+
+const forgotPasswordController = async (req, res) => {
+  try {
+    const { email } = req.body;
+    const result = await forgotPasswordService(email);
+
+    return res.status(200).json({
+      message: "Success",
+      data: result,
+    });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({
+      message: err?.message,
+    });
+  }
+};
+
+const resetPasswordController = async (req, res) => {
+  try {
+    const { token } = req.query;
+    const result = await resetPasswordService(email);
+
+    return res.status(200).json({
+      message: "Success",
+      data: result,
+    });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({
+      message: err?.message,
+    });
+  }
+};
 
 const loginController = async (req, res) => {
   try {
@@ -26,11 +65,14 @@ const keepLoginController = async (req, res) => {
       data: result,
     });
   } catch (err) {
-    return res.status(500).send(err.message);
+    // return res.status(500).send(err.message);
+    console.log("gagal");
   }
 };
 
 module.exports = {
+  forgotPasswordController,
+  resetPasswordController,
   loginController,
   keepLoginController,
 };

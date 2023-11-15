@@ -8,6 +8,58 @@ const { keepLoginQuery } = require("../queries/authQuery");
 const { findUserQuery } = require("../queries/userQuery");
 const transporter = require("../utils/nodemailer");
 
+const forgotPasswordService = async (email) => {
+  try {
+    const check = await findUserQuery({ email });
+    if (!check) throw new Error("Email doesnt exist");
+
+    const temp = await fs.readFileSync(
+      path.join(__dirname, "../template", "registration-template.html"),
+      "utf-8"
+    );
+
+    let payload = {
+      id: check.id,
+      email: check.email,
+    };
+
+    const token = jwt.sign(payload, process.env.JWT_SECRET_KEY, {
+      expiresIn: "10s",
+    });
+
+    // const activationLink = `${process.env.FE_BASE_URL}/verify?token=${token}`;
+    // console.log(token);
+    const activationLink = `localhost:8080/reset-password?token=${token}`;
+    console.log(activationLink);
+
+    const tempCompile = await handlebars.compile(temp);
+    const tempResult = tempCompile({
+      email: check.email,
+      link: activationLink,
+    });
+
+    await transporter.sendMail({
+      from: process.env.GMAIL_USER,
+      to: check.email,
+      subject: "Activation",
+      html: tempResult,
+    });
+
+    // return res;
+  } catch (err) {
+    throw err;
+  }
+};
+
+const resetPasswordService = async (token) => {
+  try {
+    return "berhasil";
+    s;
+  } catch (err) {
+    return "gagal";
+  }
+};
+
 const loginService = async (username, password) => {
   try {
     const check = await findUserQuery({ username });
@@ -45,6 +97,8 @@ const keepLoginService = async (id) => {
 };
 
 module.exports = {
+  forgotPasswordService,
+  resetPasswordService,
   loginService,
   keepLoginService,
 };
