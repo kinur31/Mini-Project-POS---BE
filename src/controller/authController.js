@@ -1,4 +1,4 @@
-const { loginService, keepLoginService } = require("../services/auth1Service");
+const { loginService, keepLoginService } = require("../services/authService");
 
 const loginController = async (req, res) => {
   try {
