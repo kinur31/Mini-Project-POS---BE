@@ -42,8 +42,6 @@ const forgotPasswordService = async (email) => {
       subject: "Activation",
       html: tempResult,
     });
-
-    // return res;
   } catch (err) {
     throw err;
   }
