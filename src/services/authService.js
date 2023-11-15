@@ -27,15 +27,13 @@ const forgotPasswordService = async (email) => {
       expiresIn: "10s",
     });
 
-    // const activationLink = `${process.env.FE_BASE_URL}/verify?token=${token}`;
-    // console.log(token);
-    const activationLink = `localhost:8080/reset-password?token=${token}`;
-    console.log(activationLink);
+    const resetPasswordLink = `${process.env.FE_BASE_URL}/reset-password?token=${token}`;
+    console.log(resetPasswordLink);
 
     const tempCompile = await handlebars.compile(temp);
     const tempResult = tempCompile({
       email: check.email,
-      link: activationLink,
+      link: resetPasswordLink,
     });
 
     await transporter.sendMail({
