@@ -2,12 +2,13 @@ const { filterProductService, paginationProductService } = require("../services/
 
 const filterProductController = async (req, res) => {
     try {
-        const { productName, productCategory } = req.query;
-        const result = await filterProductService( productName, productCategory );
+        const { productName, productCategory, page, pageSize } = req.query;
+        const result = await filterProductService( productName, productCategory, page, pageSize );
 
         return res.status(200).json({
             message: "Success",
-            data: result
+            data: result.product,
+            totalPage: result.totalPage
         })
     } catch (err) {
         return res.status(500).send(err?.message);
