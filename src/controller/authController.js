@@ -25,7 +25,8 @@ const forgotPasswordController = async (req, res) => {
 const resetPasswordController = async (req, res) => {
   try {
     const { token } = req.query;
-    const result = await resetPasswordService(email);
+    const { password } = req.body;
+    const result = await resetPasswordService(token, password);
 
     return res.status(200).json({
       message: "Success",

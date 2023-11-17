@@ -6,8 +6,8 @@ require("dotenv").config({
   path: path.resolve(__dirname, "../.env"),
 });
 
-// const db = require("./models");
-// db.sequelize.sync({alter: true})
+const db = require("./models");
+db.sequelize.sync({ alter: true });
 
 const PORT = process.env.PORT || 8000;
 

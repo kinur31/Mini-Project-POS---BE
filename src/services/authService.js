@@ -4,7 +4,11 @@ const path = require("path");
 const handlebars = require("handlebars");
 const fs = require("fs");
 
-const { keepLoginQuery } = require("../queries/authQuery");
+const {
+  keepLoginQuery,
+  forgotPasswordQuery,
+  resetPasswordQuery,
+} = require("../queries/authQuery");
 const { findUserQuery } = require("../queries/userQuery");
 const transporter = require("../utils/nodemailer");
 
@@ -24,10 +28,12 @@ const forgotPasswordService = async (email) => {
     };
 
     const token = jwt.sign(payload, process.env.JWT_SECRET_KEY, {
-      expiresIn: "60s",
+      expiresIn: "1hr",
     });
 
-    const resetPasswordLink = `${process.env.FE_BASE_URL}/reset-password?token=${token}`;
+    await forgotPasswordQuery(email, token);
+
+    const resetPasswordLink = `${process.env.FE_BASE_URL}/auth/reset-password?token=${token}`;
     console.log(resetPasswordLink);
 
     const tempCompile = await handlebars.compile(temp);
@@ -47,11 +53,23 @@ const forgotPasswordService = async (email) => {
   }
 };
 
-const resetPasswordService = async (token) => {
+const resetPasswordService = async (token, password) => {
   try {
-    return "berhasil";
+    const secretKey = process.env.JWT_SECRET_KEY;
+    if (!secretKey) {
+      throw new Error("JWT_SECRET_KEY is not set in the environment");
+    }
+
+    const decoded = jwt.verify(token, secretKey);
+    if (typeof decoded === "object" && "email" in decoded) {
+      const salt = await bcrypt.genSalt(10);
+      const hashPassword = await bcrypt.hash(password, salt);
+      await resetPasswordQuery(decoded.email, hashPassword);
+    } else {
+      throw new Error("Invalid token");
+    }
   } catch (err) {
-    return "gagal";
+    throw err;
   }
 };
 

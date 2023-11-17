@@ -30,7 +30,32 @@ const keepLoginQuery = async (id) => {
   }
 };
 
+const forgotPasswordQuery = async (email, token) => {
+  try {
+    const res = await users.update({ token }, { where: { email } });
+
+    return res;
+  } catch (err) {
+    throw err;
+  }
+};
+
+const resetPasswordQuery = async (email, password) => {
+  try {
+    const res = await users.update(
+      { password, token: null },
+      { where: { email } }
+    );
+
+    return res;
+  } catch (err) {
+    throw err;
+  }
+};
+
 module.exports = {
+  resetPasswordQuery,
+  forgotPasswordQuery,
   loginQuery,
   keepLoginQuery,
 };

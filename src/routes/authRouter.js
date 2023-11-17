@@ -9,9 +9,9 @@ const {
   resetPasswordController,
 } = require("../controller/authController");
 
-router.post("/forgot-password", forgotPasswordController);
+router.patch("/forgot-password", forgotPasswordController);
 router.post("/login", loginController);
 router.get("/keep-login", verifyToken, keepLoginController);
-router.patch("/reset-password:token", resetPasswordController);
+router.patch("/reset-password", resetPasswordController);
 
 module.exports = router;
