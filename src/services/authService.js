@@ -24,7 +24,7 @@ const forgotPasswordService = async (email) => {
     };
 
     const token = jwt.sign(payload, process.env.JWT_SECRET_KEY, {
-      expiresIn: "10s",
+      expiresIn: "60s",
     });
 
     const resetPasswordLink = `${process.env.FE_BASE_URL}/reset-password?token=${token}`;

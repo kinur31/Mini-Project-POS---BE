@@ -12,6 +12,6 @@ const {
 router.post("/forgot-password", forgotPasswordController);
 router.post("/login", loginController);
 router.get("/keep-login", verifyToken, keepLoginController);
-router.get("/reset-password:token", resetPasswordController);
+router.patch("/reset-password:token", resetPasswordController);
 
 module.exports = router;
