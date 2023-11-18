@@ -30,7 +30,7 @@ router.delete("/:id", deleteProductCategoryController);
 
 //Product
 router.post("/add-product", uploadProductFile, createProductController);
-router.delete("/:id", deleteProductController);
+router.delete("/delete/:id", deleteProductController);
 router.patch("/:id", updateProductController);
 router.get("/list-product", getProductController);
 
