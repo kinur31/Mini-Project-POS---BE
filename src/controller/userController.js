@@ -48,8 +48,15 @@ const createCashierController = async (req, res) => {
 const updateCashierController = async (req, res) => {
   try {
     const { id } = req.params;
-    const { fullname, address, username } = req.body;
-    const result = await updateCashierService(id, fullname, address, username);
+    const { fullname, address, username, avatar, status } = req.body;
+    const result = await updateCashierService(
+      id,
+      fullname,
+      address,
+      username,
+      avatar,
+      status
+    );
 
     return res.status(200).json({
       message: "Update successfully",

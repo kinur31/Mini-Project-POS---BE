@@ -64,12 +64,26 @@ const createCashierService = async (
   }
 };
 
-const updateCashierService = async (id, fullname, address, username) => {
+const updateCashierService = async (
+  id,
+  fullname,
+  address,
+  username,
+  avatar,
+  status
+) => {
   try {
     const check = await findUserQuery({ id });
     if (!check) throw new Error("Username not found");
 
-    const result = await updateCashierQuery(id, fullname, address, username);
+    const result = await updateCashierQuery(
+      id,
+      fullname,
+      address,
+      username,
+      avatar,
+      status
+    );
 
     return result;
   } catch (err) {

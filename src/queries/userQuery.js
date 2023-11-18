@@ -59,14 +59,22 @@ const createCashierQuery = async (
   }
 };
 
-const updateCashierQuery = async (id, fullname, address, username) => {
+const updateCashierQuery = async (
+  id,
+  fullname,
+  address,
+  username,
+  avatar,
+  status
+) => {
   try {
     const res = await users.update(
       {
         fullname,
         address,
         username,
-        status: true,
+        avatar,
+        status,
       },
       {
         where: {
