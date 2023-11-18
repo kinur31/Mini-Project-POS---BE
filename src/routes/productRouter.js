@@ -26,7 +26,7 @@ router.post(
   createProductCategoryController
 );
 router.patch("/:id", updateProductCategoryController);
-router.delete("/:id", deleteProductCategoryController);
+router.delete("/destroy/:id", deleteProductCategoryController);
 
 //Product
 router.post("/add-product", uploadProductFile, createProductController);

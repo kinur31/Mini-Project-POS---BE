@@ -28,6 +28,8 @@ app.use(
 const productRouter = require('./routes/productRouter');
 app.use("/product", productRouter);
 
+app.use("/uploads", express.static(path.join(__dirname, "./public/images")));
+
 app.listen(PORT, (req, res) => {
     console.log(`server started on port ${PORT}`);
 });

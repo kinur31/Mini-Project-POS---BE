@@ -1,7 +1,7 @@
 const sequelize = require("../models");
 const { Op, Sequelize } = require("sequelize");
 const db = require("../models");
-const products = db.products;
+const products = db.product;
 
 
 const findProductQuery = async ({id=null}) => {
@@ -22,7 +22,10 @@ const findProductQuery = async ({id=null}) => {
 
 const getProductQuery = async () => {
   try {
-    const res = await products.findAll();
+    const res = await products.findAll({
+      include: [db.productCategory],
+  });
+    
     return res;
   } catch (err) {
     throw err;
