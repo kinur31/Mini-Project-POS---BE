@@ -21,7 +21,7 @@ const verifyToken = (req, res, next) => {
   }
 };
 
-const checkRoles = (req, res, next) => {
+const checkRolesAdmin = (req, res, next) => {
   try {
     if (req.user.role_id === 1) {
       next();
@@ -35,5 +35,5 @@ const checkRoles = (req, res, next) => {
 
 module.exports = {
   verifyToken,
-  checkRoles,
+  checkRolesAdmin,
 };
