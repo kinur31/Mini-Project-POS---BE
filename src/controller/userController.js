@@ -1,9 +1,24 @@
 const {
+  findCashierByIdService,
   createCashierService,
   updateCashierService,
   deleteCashierService,
   deactiveCashierService,
 } = require("../services/userService");
+
+const findCashierByIdController = async (req, res) => {
+  try {
+    const result = await findCashierByIdService();
+
+    return res.status(200).json({
+      message: "Success",
+      data: result,
+    });
+  } catch (err) {
+    console.error("Error:", err);
+    return res.status(500).send("Internal Server Error");
+  }
+};
 
 const createCashierController = async (req, res) => {
   try {
@@ -71,6 +86,7 @@ const deactiveCashierController = async (req, res) => {
 };
 
 module.exports = {
+  findCashierByIdController,
   createCashierController,
   updateCashierController,
   deleteCashierController,

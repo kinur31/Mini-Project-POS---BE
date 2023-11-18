@@ -5,6 +5,7 @@ const handlebars = require("handlebars");
 const fs = require("fs");
 
 const {
+  findCashierByIdQuery,
   createCashierQuery,
   updateCashierQuery,
   deleteCashierQuery,
@@ -12,6 +13,16 @@ const {
 } = require("../queries/userQuery");
 const { findUserQuery } = require("../queries/userQuery");
 const transporter = require("../utils/nodemailer");
+
+const findCashierByIdService = async () => {
+  try {
+    const res = await findCashierByIdQuery();
+
+    return res;
+  } catch (err) {
+    throw err;
+  }
+};
 
 const createCashierService = async (
   fullname,
@@ -91,6 +102,7 @@ const deactiveCashierService = async (id) => {
 };
 
 module.exports = {
+  findCashierByIdService,
   createCashierService,
   updateCashierService,
   deleteCashierService,

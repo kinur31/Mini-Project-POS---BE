@@ -21,6 +21,20 @@ const findUserQuery = async ({ id = null, email = null, username = null }) => {
   }
 };
 
+const findCashierByIdQuery = async () => {
+  try {
+    const res = await users.findAll({
+      where: {
+        role_id: 2,
+      },
+    });
+
+    return res;
+  } catch (err) {
+    throw err;
+  }
+};
+
 const createCashierQuery = async (
   fullname,
   address,
@@ -101,6 +115,7 @@ const deactiveCashierQuery = async (id) => {
 
 module.exports = {
   findUserQuery,
+  findCashierByIdQuery,
   createCashierQuery,
   updateCashierQuery,
   deleteCashierQuery,
