@@ -102,30 +102,10 @@ const deleteCashierQuery = async (id) => {
   }
 };
 
-const deactiveCashierQuery = async (id) => {
-  try {
-    const res = await users.update(
-      {
-        status: false,
-      },
-      {
-        where: {
-          id: id,
-        },
-      }
-    );
-    console.log(res);
-    return res;
-  } catch (err) {
-    throw err;
-  }
-};
-
 module.exports = {
   findUserQuery,
   findCashierByIdQuery,
   createCashierQuery,
   updateCashierQuery,
   deleteCashierQuery,
-  deactiveCashierQuery,
 };

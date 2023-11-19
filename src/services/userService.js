@@ -9,7 +9,6 @@ const {
   createCashierQuery,
   updateCashierQuery,
   deleteCashierQuery,
-  deactiveCashierQuery,
 } = require("../queries/userQuery");
 const { findUserQuery } = require("../queries/userQuery");
 const transporter = require("../utils/nodemailer");
@@ -102,23 +101,9 @@ const deleteCashierService = async (id) => {
   }
 };
 
-const deactiveCashierService = async (id) => {
-  try {
-    const check = await findUserQuery({ id });
-    if (!check) throw new Error("Cashier not found");
-
-    const result = await deactiveCashierQuery(id);
-
-    return result;
-  } catch (err) {
-    throw err;
-  }
-};
-
 module.exports = {
   findCashierByIdService,
   createCashierService,
   updateCashierService,
   deleteCashierService,
-  deactiveCashierService,
 };
