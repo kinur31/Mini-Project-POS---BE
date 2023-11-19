@@ -10,7 +10,12 @@ const {
 } = require("../controller/userController");
 const { verifyToken, checkRolesAdmin } = require("../middleware/auth");
 
-router.post("/", verifyToken, checkRolesAdmin, createCashierController);
+router.post(
+  "/add-cashier",
+  verifyToken,
+  // checkRolesAdmin,
+  createCashierController
+);
 router.get("/findCashier", findCashierByIdController);
 router.patch("/:id", updateCashierController);
 router.delete("/:id", deleteCashierController);
