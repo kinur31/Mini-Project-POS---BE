@@ -13,7 +13,7 @@ const { verifyToken, checkRolesAdmin } = require("../middleware/auth");
 router.post(
   "/add-cashier",
   verifyToken,
-  // checkRolesAdmin,
+  checkRolesAdmin,
   createCashierController
 );
 router.get("/findCashier", findCashierByIdController);
