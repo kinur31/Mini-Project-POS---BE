@@ -37,7 +37,8 @@ const getProductService = async () => {
     product_category_id,
     price,
     stock,
-    image) => {
+    image,
+    status_product,) => {
     try {
         const check = await findProductQuery({id});
         if (!check) throw new Error("Product not found");
@@ -46,7 +47,8 @@ const getProductService = async () => {
         product_category_id,
         price,
         stock,
-        image);
+        image,
+        status_product);
    
    }  catch (err) {
     throw err
@@ -69,7 +71,7 @@ const deleteProductService = async (id) => {
 
        const result = await deleteProductQuery (id);
        
-      return result
+      return result;
   } catch (err) {
     throw err;
   }

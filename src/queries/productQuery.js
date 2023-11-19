@@ -62,7 +62,8 @@ const updateProductQuery = async (id, product_name,
   product_category_id,
   price,
   stock,
-  image) => {
+  image,
+  status_product,) => {
     console.log(id, product_name, product_category_id, price)
   try {
       const res = await products.update(
@@ -71,7 +72,8 @@ const updateProductQuery = async (id, product_name,
             product_category_id,
             price,
             stock,
-            image
+            image,
+            status_product,
           },
           {
               where:{
@@ -86,7 +88,7 @@ const updateProductQuery = async (id, product_name,
 };
 
 
-const deactiveProductQuery = async (id) => {
+const statusProductQuery = async (id) => {
   try {
       const res = await products.update(
           {
@@ -125,7 +127,7 @@ module.exports = {
     createProductQuery,
     findProductQuery,
     updateProductQuery,
-    deactiveProductQuery,
+    statusProductQuery,
     deleteProductQuery,
     getProductQuery,
 };

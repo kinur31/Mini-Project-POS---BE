@@ -38,7 +38,7 @@ const updateProductController = async (req, res) => {
   console.log();
   try {
     const { id } = req.params;
-    const { product_name, product_category_id, price, stock } =
+    const { product_name, product_category_id, price, stock, status_product } =
       req.body;
      await updateProductService(
       id,
@@ -46,8 +46,9 @@ const updateProductController = async (req, res) => {
       product_category_id,
       price,
       stock,
-      req.file?.filename
-    );
+      req.file?.filename,
+      status_product,
+      );
 
     return res.status(200).json({
       message: "Update product successfully",
