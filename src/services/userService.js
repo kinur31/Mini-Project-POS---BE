@@ -95,7 +95,9 @@ const deleteCashierService = async (id) => {
     const check = await findUserQuery({ id });
     if (!check) throw new Error("User not found");
 
-    await deleteCashierQuery(id);
+    const result = await deleteCashierQuery(id);
+
+    return result;
   } catch (err) {
     throw err;
   }

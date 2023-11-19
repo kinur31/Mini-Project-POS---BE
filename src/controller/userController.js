@@ -3,7 +3,6 @@ const {
   createCashierService,
   updateCashierService,
   deleteCashierService,
-  deactiveCashierService,
 } = require("../services/userService");
 
 const findCashierByIdController = async (req, res) => {
@@ -69,7 +68,7 @@ const updateCashierController = async (req, res) => {
 const deleteCashierController = async (req, res) => {
   try {
     const { id } = req.params;
-    await deleteCashierService(id);
+    const result = await deleteCashierService(id);
 
     return res.status(200).json({
       message: "Delete cashier successfully",

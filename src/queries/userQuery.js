@@ -91,12 +91,13 @@ const updateCashierQuery = async (
 
 const deleteCashierQuery = async (id) => {
   try {
-    await users.destroy({
+    const res = await users.destroy({
       where: {
         id: id,
       },
     });
     console.log(res);
+    return res;
   } catch (err) {
     throw err;
   }
