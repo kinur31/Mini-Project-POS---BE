@@ -1,5 +1,8 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+const path = require("path");
+const handlebars = require("handlebars");
+const fs = require("fs");
 
 const {
   registerQuery,
