@@ -33,26 +33,31 @@ const getProductService = async () => {
   };
 
 
-  const updateProductService = async (id, product_name,
+  const updateProductService = async (
+    id,
+    product_name,
     product_category_id,
     price,
     stock,
     image,
-    status_product,) => {
+    status_product
+  ) => {
     try {
-        const check = await findProductQuery({id});
-        if (!check) throw new Error("Product not found");
-
-       await updateProductQuery (id, product_name,
-        product_category_id,
-        price,
-        stock,
-        image,
-        status_product);
-   
-   }  catch (err) {
-    throw err
-}};
+      const check = await findProductQuery({ id });
+      if (!check) {
+        throw new Error("Product not found");
+      }
+  
+      await updateProductQuery(id, product_name, product_category_id, price, stock, image, status_product);
+  
+      // Return something meaningful after updating the product if needed
+      return { message: "Product updated successfully" };
+    } catch (err) {
+      // Rethrow the error to be caught and handled by the calling function
+      throw err;
+    }
+  };
+  
 
 const deactiveProductService = async (id) => {
     try {

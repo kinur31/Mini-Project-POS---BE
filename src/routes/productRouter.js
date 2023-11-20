@@ -16,7 +16,7 @@ const {
   updateProductController,
   getProductController,
 } = require("../controller/productController");
-const { uploadProductFile } = require("../middleware/multer");
+const { uploadProductFile, uploadAvatarFile } = require("../middleware/multer");
 
 //Product Category
 router.get("/list-category", getProductCategoryController);
@@ -31,7 +31,7 @@ router.delete("/destroy/:id", deleteProductCategoryController);
 //Product
 router.post("/add-product", uploadProductFile, createProductController);
 router.delete("/ignore/:id", deleteProductController);
-router.patch("/edit/:id", updateProductController);
+router.patch("/edit/:id", uploadProductFile, updateProductController);
 router.get("/list-product", getProductController);
 
 module.exports = router;

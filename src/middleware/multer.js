@@ -8,7 +8,7 @@ const productStorage = multer.diskStorage({
   filename: (req, file, cb) => {
     // const { username } = req.user;
     // cb(null, `event_${username}-${Date.now()}-${file.originalname}`);
-    cb(null, `event_user-${Date.now()}-${file.originalname}`);
+    cb(null, `product-${Date.now()}-${file.originalname}`);
   },
 });
 

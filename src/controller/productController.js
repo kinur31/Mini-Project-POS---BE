@@ -35,28 +35,34 @@ const createProductController = async (req, res) => {
 };
 
 const updateProductController = async (req, res) => {
-  console.log();
   try {
     const { id } = req.params;
-    const { product_name, product_category_id, price, stock, status_product } =
-      req.body;
-     await updateProductService(
+    const { product_name, product_category_id, price, stock, status_product } = req.body;
+
+    // let fileName = '';
+    // if (req.file && req.file.filename) {
+    //   fileName = req.file.filename;
+    // }
+
+    await updateProductService(
       id,
       product_name,
       product_category_id,
       price,
       stock,
+      // fileName,
       req.file?.filename,
-      status_product,
-      );
+      status_product
+    );
 
     return res.status(200).json({
       message: "Update product successfully",
     });
   } catch (err) {
-    return res.status(500).send(err?.message);
+    return res.status(500).send(err?.message || "Internal Server Error");
   }
 };
+
 
 const getProductController = async (req, res) => {
   try {

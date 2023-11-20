@@ -57,34 +57,37 @@ const createProductQuery = async (
   }
 };
 
-
-const updateProductQuery = async (id, product_name,
+const updateProductQuery = async (
+  id,
+  product_name,
   product_category_id,
   price,
   stock,
   image,
-  status_product,) => {
-    console.log(id, product_name, product_category_id, price)
+  status_product
+) => {
   try {
-      const res = await products.update(
-          {
-            product_name,
-            product_category_id,
-            price,
-            stock,
-            image,
-            status_product,
-          },
-          {
-              where:{
-                  id: id,
-              } 
-      })
+    // if (image !== undefined) data.image = image;
+    const res = await products.update(
+      {
+        product_name,
+        product_category_id,
+        price,
+        stock,
+        image,
+        status_product,
+      },
+      {
+        where: {
+          id: id,
+        },
+      }
+    );
 
-  return res;
-} catch (err) {
-  throw err;
-}
+    return res; // Sequelize's update method returns the number of affected rows
+  } catch (err) {
+    throw err;
+  }
 };
 
 
