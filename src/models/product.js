@@ -1,6 +1,6 @@
 module.exports = (sequelize, Sequelize) => {
-  const products = sequelize.define(
-    "products",
+  const product = sequelize.define(
+    "product",
     {
       product_name: {
         type: Sequelize.STRING,
@@ -27,11 +27,11 @@ module.exports = (sequelize, Sequelize) => {
     }
   );
 
-  products.associate = (models) => {
-    products.belongsTo(models.productCategory, {
+  product.associate = (models) => {
+    product.belongsTo(models.productCategory, {
       foreignKey: "product_category_id",
     });
   };
 
-  return products;
+  return product;
 };

@@ -13,8 +13,8 @@ module.exports = (sequelize, Sequelize) => {
   );
 
   productCategory.associate = (models) => {
-    productCategory.hasMany(models.products, {
-      foreignKey: "product_category_id"
+    productCategory.hasMany(models.product, {
+      foreignKey: "product_category_id",
     });
   };
 

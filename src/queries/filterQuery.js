@@ -1,52 +1,39 @@
-const { Op, Sequelize } = require("sequelize");
+const { Op } = require("sequelize");
 const db = require("../models");
-const { count } = require("console");
-const products = db.products;
+const products = db.product;
 
 const filterProductQuery = async ({
   product_name = null,
   product_category_id = null,
+  sortBy = null,
   page = null,
   pageSize = 10,
 }) => {
-  console.log(`Data: ${product_name}`);
   try {
-    const filter = {};
-    if (product_name && product_name !== undefined) {
-      filter.product_name = { [Op.like]: `%${product_name}%` };
-    }
+    const filter = {
+      ...(product_name && { product_name: { [Op.like]: `%${product_name}%` } }),
+      ...(product_category_id && { product_category_id }),
+    };
 
-    if (product_category_id && product_category_id !== "undefined") {
-      filter.product_category_id = product_category_id;
-    }
+    const orderOptions = {
+      name_asc: [["product_name", "ASC"]],
+      name_desc: [["product_name", "DESC"]],
+      price_asc: [["price", "ASC"]],
+      price_desc: [["price", "DESC"]],
+    };
 
-    
+    const order = orderOptions[sortBy];
+
     const { count, rows: product } = await products.findAndCountAll({
       include: [db.productCategory],
-      where: { ...filter },
+      where: filter,
+      order,
       limit: pageSize ? +pageSize : 10,
       offset: page ? page * pageSize - pageSize : 0,
-    //   totalPage: totalPage,
-    });
-    
-    const totalPage = Math.ceil(count / pageSize)
-    console.log(totalPage);
-    return {product, totalPage};
-  } catch (err) {
-    throw err;
-  }
-};
-
-const paginationProductQuery = async ({ page = null, pageSize = null }) => {
-  console.log(page, pageSize);
-  try {
-    const res = await products.findAndCountAll({
-      include: [db.productCategory],
-      limit: pageSize ? +pageSize : 5,
-      offset: page ? page * pageSize - pageSize : 0,
     });
 
-    return res;
+    const totalPage = Math.ceil(count / pageSize);
+    return { product, totalPage };
   } catch (err) {
     throw err;
   }
@@ -54,5 +41,4 @@ const paginationProductQuery = async ({ page = null, pageSize = null }) => {
 
 module.exports = {
   filterProductQuery,
-  paginationProductQuery,
 };

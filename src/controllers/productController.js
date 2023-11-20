@@ -5,13 +5,13 @@ const getProductController = async (req, res) => {
     const result = await getProductService();
     return res.status(200).json({
       message: "Success",
-      data: result
-    })
+      data: result,
+    });
   } catch (err) {
     throw err;
   }
-}
+};
 
 module.exports = {
-  getProductController
+  getProductController,
 };

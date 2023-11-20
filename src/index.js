@@ -1,9 +1,9 @@
-const express = require('express');
-const bodyParser = require('body-parser');
+const express = require("express");
+const bodyParser = require("body-parser");
 const cors = require("cors");
 const path = require("path");
 require("dotenv").config({
-    path: path.resolve(__dirname, "../.env"),
+  path: path.resolve(__dirname, "../.env"),
 });
 
 // const db = require("./models");
@@ -15,22 +15,20 @@ const app = new express();
 
 app.use(bodyParser.json());
 app.use(
-    cors(
-        {
-        origin: [
-            process.env.WHITELISTED_DOMAIN && 
-                process.env.WHITELISTED_DOMAIN.split(" "),
-        ],
-    }
-    )
+  cors({
+    origin: [
+      process.env.WHITELISTED_DOMAIN &&
+        process.env.WHITELISTED_DOMAIN.split(" "),
+    ],
+  })
 );
 
-const productRouter = require('./routes/productRouter');
+const productRouter = require("./routes/productRouter");
 app.use("/product", productRouter);
 
 const filterRouter = require("./routes/filterRouter");
-app.use("/filter", filterRouter)
+app.use("/filter", filterRouter);
 
 app.listen(PORT, (req, res) => {
-    console.log(`server started on port ${PORT}`);
+  console.log(`server started on port ${PORT}`);
 });
