@@ -4,6 +4,7 @@ const bcrypt = require("bcrypt");
 const {
   registerQuery,
   keepLoginQuery,
+  forgotPasswordQuery,
   resetPasswordQuery,
 } = require("../queries/authQuery");
 const { findUserQuery } = require("../queries/userQuery");
