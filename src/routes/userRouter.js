@@ -8,7 +8,6 @@ const {
   deleteCashierController,
 } = require("../controller/userController");
 const { verifyToken, checkRolesAdmin } = require("../middleware/auth");
-const { filterCashierController } = require("../controller/filterContoller");
 
 router.post(
   "/add-cashier",
@@ -19,6 +18,5 @@ router.post(
 router.get("/findCashier", findCashierByIdController);
 router.patch("/:id", updateCashierController);
 router.delete("/:id", deleteCashierController);
-router.get("/", filterCashierController);
 
 module.exports = router;
