@@ -12,11 +12,10 @@ const {
 } = require("../controller/authController");
 
 const validations = [
-  body("email")
+  body("username")
     .notEmpty()
-    .withMessage("Email cannot be empty")
-    .isEmail()
-    .withMessage("Invalid email format"),
+    .withMessage("Username cannot be empty")
+    .withMessage("Invalid username format"),
   body("password").notEmpty().withMessage("Password cannot be empty"),
 ];
 

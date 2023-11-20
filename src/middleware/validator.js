@@ -1,5 +1,3 @@
-// validator.js
-
 const { validationResult } = require("express-validator");
 
 const validator = (validations) => {
