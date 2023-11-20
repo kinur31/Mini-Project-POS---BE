@@ -4,6 +4,23 @@ const {
   keepLoginService,
 } = require("../services/authService");
 
+const forgotPasswordController = async (req, res) => {
+  try {
+    const { email } = req.body;
+    const result = await forgotPasswordService(email);
+
+    return res.status(200).json({
+      message: "Success",
+      data: result,
+    });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({
+      message: err?.message,
+    });
+  }
+};
+
 const registerController = async (req, res) => {
   try {
     const { fullname, address, email, username, password, role_id } = req.body;
@@ -60,6 +77,7 @@ const keepLoginController = async (req, res) => {
 };
 
 module.exports = {
+  forgotPasswordController,
   registerController,
   loginController,
   keepLoginController,
