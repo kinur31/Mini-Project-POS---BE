@@ -9,8 +9,8 @@ const getTransactionDetailQuery = async () => {
       {
         include: [
           {
-            model: db.product, // Assuming "product" is the name of your product model
-            as: "product", // Optional alias for the association
+            model: db.product, 
+            as: "product", 
           },
         ],
       }
