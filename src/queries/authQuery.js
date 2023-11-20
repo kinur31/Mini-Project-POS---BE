@@ -55,7 +55,21 @@ const keepLoginQuery = async (id) => {
   }
 };
 
+const resetPasswordQuery = async (email, password) => {
+  try {
+    const res = await users.update(
+      { password, token: null },
+      { where: { email } }
+    );
+
+    return res;
+  } catch (err) {
+    throw err;
+  }
+};
+
 module.exports = {
+  resetPasswordQuery,
   registerQuery,
   loginQuery,
   keepLoginQuery,

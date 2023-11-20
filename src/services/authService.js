@@ -1,7 +1,11 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
-const { registerQuery, keepLoginQuery } = require("../queries/authQuery");
+const {
+  registerQuery,
+  keepLoginQuery,
+  resetPasswordQuery,
+} = require("../queries/authQuery");
 const { findUserQuery } = require("../queries/userQuery");
 const transporter = require("../utils/nodemailer");
 
