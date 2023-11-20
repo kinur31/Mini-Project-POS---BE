@@ -23,7 +23,6 @@ const emailValidations = [
   body("email")
     .notEmpty()
     .withMessage("Email cannot be empty")
-    .isEmail()
     .withMessage("Invalid email format"),
 ];
 

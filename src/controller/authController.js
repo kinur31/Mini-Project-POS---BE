@@ -2,6 +2,8 @@ const {
   registerService,
   loginService,
   keepLoginService,
+  forgotPasswordService,
+  resetPasswordService,
 } = require("../services/authService");
 
 const forgotPasswordController = async (req, res) => {
