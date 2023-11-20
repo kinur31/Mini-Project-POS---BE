@@ -28,6 +28,9 @@ app.use(
 const reportRouter = require("./routes/reportRouter");
 app.use("/report", reportRouter);
 
+const transactionRouter = require("./routes/transactionRouter");
+app.use("/transaction", transactionRouter);
+
 app.listen(PORT, (req, res) => {
     console.log(`server started on port ${PORT}`);
 });

@@ -28,6 +28,11 @@ module.exports = (sequelize, Sequelize) => {
       foreignKey: "transaction_id",
       as: "transaction",
     });
+
+    transactionDetail.belongsTo(models.product, {
+      foreignKey: "product_id",
+      as: "product",
+    });
   };
 
   return transactionDetail;
