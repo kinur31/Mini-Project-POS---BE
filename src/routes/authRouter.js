@@ -1,6 +1,6 @@
-import { body } from "express-validator";
 const express = require("express");
 const router = express.Router();
+const { body } = require("express-validator");
 
 const { validator } = require("../middleware/validator");
 const { verifyToken } = require("../middleware/auth");
@@ -12,18 +12,25 @@ const {
 } = require("../controller/authController");
 
 const validations = [
-  body("email").notEmpty().withMessage("Email cannot be emptied"),
-  body("email").isEmail().withMessage("Email format is invalid"),
-  body("password").notEmpty().withMessage("Password cannot be emptied"),
+  body("email")
+    .notEmpty()
+    .withMessage("Email cannot be empty")
+    .isEmail()
+    .withMessage("Invalid email format"),
+  body("password").notEmpty().withMessage("Password cannot be empty"),
 ];
-const emailValid = [
-  body("email").notEmpty().withMessage("Email cannot be emptied"),
-  body("email").isEmail().withMessage("Email format is invalid"),
+
+const emailValidations = [
+  body("email")
+    .notEmpty()
+    .withMessage("Email cannot be empty")
+    .isEmail()
+    .withMessage("Invalid email format"),
 ];
 
 router.patch(
   "/forgot-password",
-  validator(emailValid),
+  validator(emailValidations),
   forgotPasswordController
 );
 router.post("/login", validator(validations), loginController);
