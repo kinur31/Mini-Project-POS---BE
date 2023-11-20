@@ -25,6 +25,10 @@ app.use(
     )
 );
 
+const filterRouter = require("./routes/filterRouter");
+app.use("/filter", filterRouter);
+
+
 app.listen(PORT, (req, res) => {
     console.log(`server started on port ${PORT}`);
 });
