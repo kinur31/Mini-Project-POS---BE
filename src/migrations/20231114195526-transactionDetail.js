@@ -3,36 +3,37 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("products", {
+    await queryInterface.createTable("transaction_details", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      product_name: {
-        type: Sequelize.STRING,
-        allownull: false,
+
+      transaction_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
       },
-      product_category_id: {
+      product_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      qty: {
         type: Sequelize.INTEGER,
       },
       price: {
-        type: Sequelize.DECIMAL,
-      },
-      stock: {
-        type: Sequelize.INTEGER,
-      },
-      image: {
-        type: Sequelize.STRING,
-      },
-      status_product: {
-        type: Sequelize.BOOLEAN,
+        type: Sequelize.DECIMAL(10, 2),
       },
     });
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("products");
+    /**
+     * Add reverting commands here.
+     *
+     * Example:
+     * await queryInterface.dropTable('users');
+     */
   },
 };

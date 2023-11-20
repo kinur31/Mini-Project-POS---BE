@@ -25,8 +25,8 @@ app.use(
     )
 );
 
-const filterRouter = require("./routes/filterRouter");
-app.use("/filter", filterRouter);
+const transactionRouter = require("./routes/transactionRouter");
+app.use("/transaction", transactionRouter);
 
 
 app.listen(PORT, (req, res) => {
