@@ -28,6 +28,14 @@ const userRouter = require("./routes/userRouter");
 
 app.use("/auth", authRouter);
 app.use("/user", userRouter);
+const transactionRouter = require("./routes/transactionRouter");
+app.use("/transaction", transactionRouter);
+
+const productRouter = require("./routes/productRouter");
+app.use("/product", productRouter);
+
+const filterRouter = require("./routes/filterRouter");
+app.use("/filter", filterRouter);
 
 app.listen(PORT, (req, res) => {
   console.log(`server started on port ${PORT}`);
