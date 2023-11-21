@@ -30,12 +30,6 @@ module.exports = (sequelize, Sequelize) => {
   product.associate = (models) => {
     product.belongsTo(models.productCategory, {
       foreignKey: "product_category_id",
-      as: "productCategory", // Optional alias for the association
-    });
-
-    product.hasMany(models.transactionDetail, {
-      foreignKey: "product_id",
-      as: "transactionDetails", // Optional alias for the association
     });
   };
 

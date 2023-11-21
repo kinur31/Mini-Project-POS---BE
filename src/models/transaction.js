@@ -38,6 +38,11 @@ module.exports = (sequelize, Sequelize) => {
       foreignKey: "transaction_id",
       as: "transactionDetails",
     });
+
+    transaction.belongsTo(models.user, {
+      foreignKey: 'cashier_id',
+      as: 'cashier',
+    });
   };
 
   return transaction;

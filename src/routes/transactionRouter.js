@@ -6,5 +6,8 @@ const {
 } = require("../controllers/transactionController");
 
 router.post("/checkout", createTransactionController);
+const { getTransactionDetailController } = require("../controllers/transactionDetailController");
+
+router.get("/transaction-detail", getTransactionDetailController);
 
 module.exports = router;
