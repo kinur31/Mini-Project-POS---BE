@@ -30,21 +30,21 @@ const getAllReportQuery = async () => {
     const report = await transactionDetail.findAll({
       include: [
         {
-          model: transaction, // Model transaction yang sesuai
-          as: 'transaction', // Nama asosiasi yang telah didefinisikan di model transactionDetail
+          model: transaction, 
+          as: 'transaction', 
           
           include: [
             {
-              model: user, // Model user yang sesuai
-              as: 'cashier', // Nama asosiasi yang telah didefinisikan di model transaction
-              attributes: ['fullname', 'email', 'address'], // Atribut dari tabel user yang ingin ditampilkan
+              model: user, 
+              as: 'cashier', 
+              attributes: ['fullname', 'email', 'address'], 
             },
           ],
           
         },
         {
-          model: product, // Model product yang sesuai
-          as: 'product', // Nama asosiasi yang akan ditambahkan di model transactionDetail
+          model: product, 
+          as: 'product', 
         },
       ],
     });
